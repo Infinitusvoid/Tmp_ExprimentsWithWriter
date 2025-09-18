@@ -135,6 +135,7 @@
     <ClCompile Include="Writer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FindAndDedupeWeb.h" />
     <ClInclude Include="FindDuplicateImageAndVideos.h" />
     <ClInclude Include="FluxTraining.h" />
     <ClInclude Include="Writer.h" />

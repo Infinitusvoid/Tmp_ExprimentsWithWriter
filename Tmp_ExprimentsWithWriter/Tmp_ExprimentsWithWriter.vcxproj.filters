@@ -35,5 +35,8 @@
     <ClInclude Include="FluxTraining.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="FindAndDedupeWeb.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
