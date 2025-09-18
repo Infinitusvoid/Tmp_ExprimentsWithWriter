@@ -16,6 +16,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="Source Files\CppCommponents">
+      <UniqueIdentifier>{96e8e03d-622a-4fb8-a1af-ddc9a3b32fd6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -23,6 +26,24 @@
     </ClCompile>
     <ClCompile Include="Writer.cpp">
       <Filter>Source Files\Writer</Filter>
+    </ClCompile>
+    <ClCompile Include="CppCommponents\File.cpp">
+      <Filter>Source Files\CppCommponents</Filter>
+    </ClCompile>
+    <ClCompile Include="CppCommponents\Folder.cpp">
+      <Filter>Source Files\CppCommponents</Filter>
+    </ClCompile>
+    <ClCompile Include="CppCommponents\ImageRGBA.cpp">
+      <Filter>Source Files\CppCommponents</Filter>
+    </ClCompile>
+    <ClCompile Include="CppCommponents\NameGenerators.cpp">
+      <Filter>Source Files\CppCommponents</Filter>
+    </ClCompile>
+    <ClCompile Include="CppCommponents\Rectangle2d.cpp">
+      <Filter>Source Files\CppCommponents</Filter>
+    </ClCompile>
+    <ClCompile Include="CppCommponents\Search_BreadthFirst_2d.cpp">
+      <Filter>Source Files\CppCommponents</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -37,6 +58,33 @@
     </ClInclude>
     <ClInclude Include="LetGenerateShadersNicely.h">
       <Filter>Source Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CppCommponents\File.h">
+      <Filter>Source Files\CppCommponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CppCommponents\Folder.h">
+      <Filter>Source Files\CppCommponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CppCommponents\ImageRGBA.h">
+      <Filter>Source Files\CppCommponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CppCommponents\json.h">
+      <Filter>Source Files\CppCommponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CppCommponents\NameGenerators.h">
+      <Filter>Source Files\CppCommponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CppCommponents\Random.h">
+      <Filter>Source Files\CppCommponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CppCommponents\Rectangle2d.h">
+      <Filter>Source Files\CppCommponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CppCommponents\Search_BreadthFirst_2d.h">
+      <Filter>Source Files\CppCommponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CppCommponents\TempleteUtils.h">
+      <Filter>Source Files\CppCommponents</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

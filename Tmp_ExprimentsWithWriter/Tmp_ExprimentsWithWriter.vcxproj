@@ -131,10 +131,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CppCommponents\File.cpp" />
+    <ClCompile Include="CppCommponents\Folder.cpp" />
+    <ClCompile Include="CppCommponents\ImageRGBA.cpp" />
+    <ClCompile Include="CppCommponents\NameGenerators.cpp" />
+    <ClCompile Include="CppCommponents\Rectangle2d.cpp" />
+    <ClCompile Include="CppCommponents\Search_BreadthFirst_2d.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Writer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CppCommponents\File.h" />
+    <ClInclude Include="CppCommponents\Folder.h" />
+    <ClInclude Include="CppCommponents\ImageRGBA.h" />
+    <ClInclude Include="CppCommponents\json.h" />
+    <ClInclude Include="CppCommponents\NameGenerators.h" />
+    <ClInclude Include="CppCommponents\Random.h" />
+    <ClInclude Include="CppCommponents\Rectangle2d.h" />
+    <ClInclude Include="CppCommponents\Search_BreadthFirst_2d.h" />
+    <ClInclude Include="CppCommponents\TempleteUtils.h" />
     <ClInclude Include="FindDuplicateImageAndVideos.h" />
     <ClInclude Include="FluxTraining.h" />
     <ClInclude Include="LetGenerateShadersNicely.h" />
