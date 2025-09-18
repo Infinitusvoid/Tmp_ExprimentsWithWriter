@@ -6,14 +6,22 @@
 
 #include "Writer.h"
 
-int main()
+#include <chrono>
+#include <thread>
+using namespace std::chrono_literals;
+
+
+void generate_shader()
 {
-	std::cout << "LetGenerateShadersNicely\n";
+	
 
 	Writer_::Writer w;
 
 	w.line("#version 450 core");
+	w.line("layout(location = 0) in vec3 aPos;");
+	w.line("layout(location = 1) in vec2 aTexCoord;");
 	w.blank();
+
 
 	w.comment("outputs to fragment");
 	w.line("out vec2 TexCoord;");
@@ -238,8 +246,8 @@ float f_adjust_to_two_pi(float x)
 					Wave wave;
 					wave.frequency_index = Random::random_int(1, 10);
 					wave.offset = Random::generate_random_float_minus_one_to_plus_one() * 10.0f;
-					wave.amplitude = Random::generate_random_float_minus_one_to_plus_one() * 0.2f;
-					wave.time_multiplier = Random::generate_random_float_minus_one_to_plus_one() * 0.01f;
+					wave.amplitude = Random::generate_random_float_minus_one_to_plus_one() * 0.37f * (1.0f / float(i + 1));
+					wave.time_multiplier = Random::generate_random_float_minus_one_to_plus_one() * 0.01f * (1.0f / float(i * i + 1));
 					wave.function_to_use = Random::random_int(0, 10);
 
 					if (Random::generate_random_float_0_to_1() > 0.5f)
@@ -327,7 +335,7 @@ float f_adjust_to_two_pi(float x)
 		{
 			std::vector<Wave> waves;
 
-			Wave::generate_waves(waves, 100);
+			Wave::generate_waves(waves, 20);
 			Wave::normalize_amplitude(waves);
 
 			Wave::write(w, waves, name_0);
@@ -339,7 +347,7 @@ float f_adjust_to_two_pi(float x)
 		{
 			std::vector<Wave> waves;
 
-			Wave::generate_waves(waves, 10);
+			Wave::generate_waves(waves, 20);
 			Wave::normalize_amplitude(waves);
 
 			Wave::write(w, waves, name_1);
@@ -486,7 +494,26 @@ float f_adjust_to_two_pi(float x)
 	w.close("}");
 
 
-	w.save("");
+	w.save("C:/Users/Cosmos/Documents/GitHub/Tmp/Tmp/shaders/vertex_9.glsl");
+}
+
+int main()
+{
+	std::cout << "LetGenerateShadersNicely\n";
+
+	auto next = std::chrono::steady_clock::now();
+
+	while (true)
+	{
+		next += 4s;
+
+		generate_shader();
+
+		std::this_thread::sleep_until(next);
+		std::cout << "Shader generated\n";
+	}
+
+	generate_shader();
 
 
 	return 0;
