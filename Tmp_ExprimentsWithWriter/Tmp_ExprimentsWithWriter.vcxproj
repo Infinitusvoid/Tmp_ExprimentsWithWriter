@@ -137,6 +137,7 @@
   <ItemGroup>
     <ClInclude Include="FindDuplicateImageAndVideos.h" />
     <ClInclude Include="FluxTraining.h" />
+    <ClInclude Include="LetGenerateShadersNicely.h" />
     <ClInclude Include="Writer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -35,5 +35,8 @@
     <ClInclude Include="Writer.h">
       <Filter>Source Files\Writer</Filter>
     </ClInclude>
+    <ClInclude Include="LetGenerateShadersNicely.h">
+      <Filter>Source Files\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
