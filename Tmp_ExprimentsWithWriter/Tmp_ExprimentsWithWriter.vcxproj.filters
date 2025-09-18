@@ -26,17 +26,14 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Writer.h">
-      <Filter>Source Files\Writer</Filter>
-    </ClInclude>
     <ClInclude Include="FindDuplicateImageAndVideos.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="FluxTraining.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="FindAndDedupeWeb.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Writer.h">
+      <Filter>Source Files\Writer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
