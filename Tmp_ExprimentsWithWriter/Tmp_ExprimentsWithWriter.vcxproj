@@ -151,7 +151,6 @@
     <ClInclude Include="CppCommponents\Search_BreadthFirst_2d.h" />
     <ClInclude Include="CppCommponents\TempleteUtils.h" />
     <ClInclude Include="FindDuplicateImageAndVideos.h" />
-    <ClInclude Include="FluxTraining.h" />
     <ClInclude Include="LetGenerateShadersNicely.h" />
     <ClInclude Include="Writer.h" />
   </ItemGroup>

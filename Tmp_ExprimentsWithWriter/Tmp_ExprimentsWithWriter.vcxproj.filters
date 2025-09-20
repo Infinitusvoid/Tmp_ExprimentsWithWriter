@@ -47,12 +47,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FindDuplicateImageAndVideos.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FluxTraining.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Writer.h">
       <Filter>Source Files\Writer</Filter>
     </ClInclude>
@@ -85,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="CppCommponents\TempleteUtils.h">
       <Filter>Source Files\CppCommponents</Filter>
+    </ClInclude>
+    <ClInclude Include="FindDuplicateImageAndVideos.h">
+      <Filter>Source Files\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

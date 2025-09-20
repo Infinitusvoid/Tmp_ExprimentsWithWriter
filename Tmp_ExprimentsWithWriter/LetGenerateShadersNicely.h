@@ -11,52 +11,56 @@
 using namespace std::chrono_literals;
 
 
+
+
 void generate_shader()
 {
 	
 
 	Writer_::Writer w;
 
-	w.line("#version 450 core");
-	w.line("layout(location = 0) in vec3 aPos;");
-	w.line("layout(location = 1) in vec2 aTexCoord;");
-	w.blank();
+	// Generate Header
+	{
+		w.line("#version 450 core");
+		w.line("layout(location = 0) in vec3 aPos;");
+		w.line("layout(location = 1) in vec2 aTexCoord;");
+		w.blank();
 
 
-	w.comment("outputs to fragment");
-	w.line("out vec2 TexCoord;");
-	w.line("out vec3 color_vs;");
-	w.line("out vec3 vWorldPos;");
-	w.line("out vec3 vNormal;");
-	w.blank();
+		w.comment("outputs to fragment");
+		w.line("out vec2 TexCoord;");
+		w.line("out vec3 color_vs;");
+		w.line("out vec3 vWorldPos;");
+		w.line("out vec3 vNormal;");
+		w.blank();
 
-	w.comment("uniforms");
-	w.line("uniform mat4 model;       // can be identity");
-	w.line("uniform mat4 view;");
-	w.line("uniform mat4 projection;");
-	w.line("uniform ivec3 uGrid;      // number of instances along X,Y,Z (instanceCount = X*Y*Z)");
-	w.line("uniform float uSpacing;   // distance between grid cells"); // we are not using this
-	w.line("uniform vec3  uOrigin;    // base world offset");
-	w.line("uniform vec3  uScaleMin;  // min scale per axis");
-	w.line("uniform vec3  uScaleMax;  // max scale per axis");
-	w.line("uniform float uTime;      // time (seconds)");
-	w.line("uniform float uRotSpeed;  // radians/sec");
-	w.line("uniform uint  uSeed;      // global random seed");
-	w.blank();
-	w.line("uniform uint uDrawcallNumber;");
-	w.line("uniform vec3 uCameraPos;");
-	w.line("uniform float u0, u1, u2, u3, u4, u5, u6, u7, u8, u9;");
-	w.blank();
+		w.comment("uniforms");
+		w.line("uniform mat4 model;       // can be identity");
+		w.line("uniform mat4 view;");
+		w.line("uniform mat4 projection;");
+		w.line("uniform ivec3 uGrid;      // number of instances along X,Y,Z (instanceCount = X*Y*Z)");
+		w.line("uniform float uSpacing;   // distance between grid cells"); // we are not using this
+		w.line("uniform vec3  uOrigin;    // base world offset");
+		w.line("uniform vec3  uScaleMin;  // min scale per axis");
+		w.line("uniform vec3  uScaleMax;  // max scale per axis");
+		w.line("uniform float uTime;      // time (seconds)");
+		w.line("uniform float uRotSpeed;  // radians/sec");
+		w.line("uniform uint  uSeed;      // global random seed");
+		w.blank();
+		w.line("uniform uint uDrawcallNumber;");
+		w.line("uniform vec3 uCameraPos;");
+		w.line("uniform float u0, u1, u2, u3, u4, u5, u6, u7, u8, u9;");
+		w.blank();
 
-	w.comment("// ---------- Constants & tiny helpers ----------");
-	w.line("const float PI = 3.1415926535897932384626433832795;");
-	w.line("const float TAU = 6.2831853071795864769252867665590;");
-	w.blank();
+		w.comment("// ---------- Constants & tiny helpers ----------");
+		w.line("const float PI = 3.1415926535897932384626433832795;");
+		w.line("const float TAU = 6.2831853071795864769252867665590;");
+		w.blank();
 
-	w.line("float saturate(float x) { return clamp(x, 0.0, 1.0); }");
-	w.blank();
+		w.line("float saturate(float x) { return clamp(x, 0.0, 1.0); }");
+		w.blank();
 
-	w.lines(R"GLSL(
+		w.lines(R"GLSL(
 uint pcg_hash(uint x) {
     x = x * 747796405u + 2891336453u;
     x = ((x >> ((x >> 28u) + 4u)) ^ x) * 277803737u;
@@ -64,12 +68,12 @@ uint pcg_hash(uint x) {
     return x;
 }
 )GLSL", {});
-	w.blank();
+		w.blank();
 
-	w.line("float rand01(inout uint s) { s = pcg_hash(s); return float(s) * (1.0 / 4294967295.0); }");
-	w.blank();
+		w.line("float rand01(inout uint s) { s = pcg_hash(s); return float(s) * (1.0 / 4294967295.0); }");
+		w.blank();
 
-	w.lines(R"GLSL(
+		w.lines(R"GLSL(
 vec3 spherical01(float r, float theta01, float phi01) {
     float theta = theta01 * TAU; // azimuth
     float phi = phi01 * PI;   // polar
@@ -77,9 +81,9 @@ vec3 spherical01(float r, float theta01, float phi01) {
     return vec3(r * sphi * cos(theta), r * cos(phi), r * sphi * sin(theta));
 }
 )GLSL", {});
-	w.blank();
+		w.blank();
 
-	w.lines(R"GLSL(
+		w.lines(R"GLSL(
 mat3 axisAngleToMat3(vec3 axis, float a) {
     float c = cos(a), s = sin(a);
     vec3 t = (1.0 - c) * axis;
@@ -90,9 +94,9 @@ mat3 axisAngleToMat3(vec3 axis, float a) {
     );
 }
 )GLSL", {});
-	w.blank();
+		w.blank();
 
-	w.lines(R"GLSL(
+		w.lines(R"GLSL(
 // Axis-aligned cube face normal from aPos (local space)
 vec3 localCubeFaceNormal(vec3 p) {
     vec3 ap = abs(p);
@@ -101,7 +105,10 @@ vec3 localCubeFaceNormal(vec3 p) {
     return vec3(0.0, 0.0, sign(p.z));
 }
 )GLSL", {});
-	w.blank();
+		w.blank();
+	}
+
+	
 
 	w.lines(R"GLSL(
 // 0 to 1
