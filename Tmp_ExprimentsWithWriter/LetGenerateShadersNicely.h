@@ -198,12 +198,84 @@ float f_adjust_to_two_pi(float x)
 		}
 		*/
 
-		int index = 0;
-		w.linef("vec3 wave_{}(float x, float y, float t)", index);
-		w.open("{");
-		w.line("return vec3(0.0, 0.0, 0.0);");
-		w.close("}");
-		w.blank();
+		class CreateWave_N0
+		{
+		public:
+			bool first = true;
+
+
+			CreateWave_N0()
+			{
+
+			}
+
+
+			void write(Writer_::Writer& w)
+			{
+				const int index = first ? 0 : 1;
+
+				w.linef("vec3 wave_{}(float x, float y, float t)", index);
+				w.open("{");
+
+				w.blank();
+				w.line("float offset_x = 0.0;");
+				w.line("float offset_y = 0.0;");
+
+				for (int i = 0; i < 10; i++)
+				{
+					float amplitude_x = Random::generate_random_float_0_to_1();
+					int frequency_x = Random::random_int(1, 10);
+					float offset_x = Random::generate_random_float_0_to_1();
+
+					float amplitude_y = Random::generate_random_float_0_to_1();
+					int frequency_y = Random::random_int(1, 10);
+					float offset_y = Random::generate_random_float_0_to_1();
+
+					w.linef("offset_x += float({}) * sin(float({}) * x + float({}));", amplitude_x, float(frequency_x), offset_x);
+
+					w.linef("offset_y += float({}) * sin(float({}) * x + float({}));", amplitude_y, float(frequency_y), offset_y);
+
+					// first_wave y 0 
+					// int first_wave_0_y_frequency = int(4);
+					// float first_wave_0_y_offset = float(-4.354416);
+					// float first_wave_0_y_amplitude = float(0.0384163);
+					// float first_wave_0_y_t = uTime * float(-0.0042715347);
+
+					//float offset = 0.0;
+					//offset += amplitude * sin(frequency * x + offset)
+
+				}
+
+				w.blank();
+				w.line("float offset = offset_x + offset_y;");
+
+				// x
+				// amplitude
+				// frequency
+				// offset
+
+				// y
+				// amplitude
+				// frequency
+				// offset
+
+				// color_r
+				// color_g
+				// color_b
+
+				w.line("");
+				w.line("return vec3(0.0, 0.0, 0.0);");
+				w.close("}");
+				w.blank();
+			}
+
+		
+		};
+
+		CreateWave_N0 wave;
+		wave.first = true;
+		wave.write(w);
+
 	}
 
 	w.line("void main()");
