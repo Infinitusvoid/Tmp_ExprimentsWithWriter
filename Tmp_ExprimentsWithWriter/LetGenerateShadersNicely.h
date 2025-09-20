@@ -186,6 +186,26 @@ float f_adjust_to_two_pi(float x)
 
 	
 
+
+	{
+		w.blank();
+		w.comment("wave functions");
+
+		/*
+		vec3 wave_0(float x, float y, float t)
+		{
+			return vec3(0.0, 0.0, 0.0);
+		}
+		*/
+
+		int index = 0;
+		w.linef("vec3 wave_{}(float x, float y, float t)", index);
+		w.open("{");
+		w.line("return vec3(0.0, 0.0, 0.0);");
+		w.close("}");
+		w.blank();
+	}
+
 	w.line("void main()");
 	w.open("{");
 
