@@ -6,6 +6,8 @@
 
 #include "Writer.h"
 
+#include <vector>
+
 #include <chrono>
 #include <thread>
 using namespace std::chrono_literals;
@@ -203,7 +205,6 @@ float f_adjust_to_two_pi(float x)
 		public:
 			bool first = true;
 
-
 			CreateWave_N0()
 			{
 
@@ -221,30 +222,150 @@ float f_adjust_to_two_pi(float x)
 				w.line("float offset_x = 0.0;");
 				w.line("float offset_y = 0.0;");
 
-				for (int i = 0; i < 10; i++)
 				{
-					float amplitude_x = Random::generate_random_float_0_to_1();
-					int frequency_x = Random::random_int(1, 10);
-					float offset_x = Random::generate_random_float_0_to_1();
+					struct Wave
+					{
+						float amplitude;
+						int frequency;
+						float offset;
+						float time_multiplier;
 
-					float amplitude_y = Random::generate_random_float_0_to_1();
-					int frequency_y = Random::random_int(1, 10);
-					float offset_y = Random::generate_random_float_0_to_1();
+						float color_r;
+						float color_g;
+						float color_b;
+					};
 
-					w.linef("offset_x += float({}) * sin(float({}) * x + float({}));", amplitude_x, float(frequency_x), offset_x);
+					std::vector<Wave> waves_x;
+					std::vector<Wave> waves_y;
 
-					w.linef("offset_y += float({}) * sin(float({}) * x + float({}));", amplitude_y, float(frequency_y), offset_y);
+					{
+						// generate
 
-					// first_wave y 0 
-					// int first_wave_0_y_frequency = int(4);
-					// float first_wave_0_y_offset = float(-4.354416);
-					// float first_wave_0_y_amplitude = float(0.0384163);
-					// float first_wave_0_y_t = uTime * float(-0.0042715347);
+						for (int i = 0; i < 10; i++)
+						{
+							{
+								float amplitude = Random::generate_random_float_0_to_1();
+								int frequency = Random::random_int(1, 10);
+								float offset = Random::generate_random_float_0_to_1();
+								float time_multiplier = 0.01;
 
-					//float offset = 0.0;
-					//offset += amplitude * sin(frequency * x + offset)
+								float color_r = Random::generate_random_float_0_to_1() * 0.2;
+								float color_g = Random::generate_random_float_0_to_1() * 0.2;
+								float color_b = Random::generate_random_float_0_to_1() * 0.2;
 
+								waves_x.push_back({ amplitude, frequency, offset , time_multiplier , color_r, color_g, color_b });
+							}
+
+							{
+								float amplitude = Random::generate_random_float_0_to_1();
+								int frequency = Random::random_int(1, 10);
+								float offset = Random::generate_random_float_0_to_1();
+								float time_multiplier = 0.01;
+
+								float color_r = Random::generate_random_float_0_to_1() * 0.2;
+								float color_g = Random::generate_random_float_0_to_1() * 0.2;
+								float color_b = Random::generate_random_float_0_to_1() * 0.2;
+
+								waves_y.push_back({ amplitude, frequency, offset , time_multiplier , color_r, color_g, color_b });
+							}
+						}
+
+						// normalize
+
+						{
+							// waves_x
+							{
+								int num = waves_x.size();
+
+								float amplitude_sum = 0.0;
+								float color_r_sum = 0.0;
+								float color_g_sum = 0.0;
+								float color_b_sum = 0.0;
+
+								for (int i = 0; i < num; i++)
+								{
+									const Wave& wave = waves_x.at(i);
+									amplitude_sum += wave.amplitude;
+									color_r_sum += wave.color_r;
+									color_g_sum += wave.color_g;
+									color_b_sum += wave.color_b;
+								}
+
+								float factor_amplitude = 1.0;
+
+								if (amplitude_sum > 1.0)
+								{
+									factor_amplitude = 1.0 / amplitude_sum;
+								}
+
+								float factor_color_r = 1.0;
+
+								if (color_r_sum > 1.0)
+								{
+									factor_color_r = 1.0 / color_r_sum;
+								}
+
+								float factor_color_g = 1.0;
+
+								if (color_g_sum > 1.0)
+								{
+									factor_color_g = 1.0 / color_g_sum;
+								}
+
+								float factor_color_b = 1.0;
+
+								if (color_b_sum > 1.0)
+								{
+									factor_color_b = 1.0 / color_b_sum;
+								}
+
+
+								for (Wave& wave : waves_x)
+								{
+									wave.amplitude *= factor_amplitude;
+									wave.color_r *= factor_color_r;
+									wave.color_g *= factor_color_g;
+									wave.color_b *= factor_color_b;
+								}
+
+
+
+
+								
+							}
+							
+						}
+
+					}
+
+
+					for (int i = 0; i < 10; i++)
+					{
+						float amplitude_x = Random::generate_random_float_0_to_1();
+						int frequency_x = Random::random_int(1, 10);
+						float offset_x = Random::generate_random_float_0_to_1();
+
+						float amplitude_y = Random::generate_random_float_0_to_1();
+						int frequency_y = Random::random_int(1, 10);
+						float offset_y = Random::generate_random_float_0_to_1();
+
+						w.linef("offset_x += float({}) * sin(float({}) * x + float({}));", amplitude_x, float(frequency_x), offset_x);
+
+						w.linef("offset_y += float({}) * sin(float({}) * x + float({}));", amplitude_y, float(frequency_y), offset_y);
+
+						// first_wave y 0 
+						// int first_wave_0_y_frequency = int(4);
+						// float first_wave_0_y_offset = float(-4.354416);
+						// float first_wave_0_y_amplitude = float(0.0384163);
+						// float first_wave_0_y_t = uTime * float(-0.0042715347);
+
+						//float offset = 0.0;
+						//offset += amplitude * sin(frequency * x + offset)
+
+					}
 				}
+
+				
 
 				w.blank();
 				w.line("float offset = offset_x + offset_y;");
