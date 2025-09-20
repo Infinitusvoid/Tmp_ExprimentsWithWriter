@@ -109,8 +109,9 @@ vec3 localCubeFaceNormal(vec3 p) {
 	}
 
 	
-
-	w.lines(R"GLSL(
+	// The periodic functions
+	{
+		w.lines(R"GLSL(
 // 0 to 1
 float f_periodic_0(float x)
 {
@@ -180,7 +181,10 @@ float f_adjust_to_two_pi(float x)
     return x * (1.0 / TAU);
 }
 )GLSL", {});
-	w.blank();
+		w.blank();
+	}
+
+	
 
 	w.line("void main()");
 	w.open("{");
@@ -502,6 +506,8 @@ float f_adjust_to_two_pi(float x)
 
 
 	w.save("C:/Users/Cosmos/Documents/GitHub/Tmp/Tmp/shaders/vertex_9.glsl");
+
+	
 }
 
 int main()
